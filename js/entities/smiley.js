@@ -9,6 +9,18 @@ function Smiley(startX, startY) {
   img.height = 100;
   img.src = 'res/smiley1.svg';
 
+  var cache = createCache();
+
+  function createCache() {
+    var cache = {};
+    cache.canvas = document.createElement('canvas');
+    cache.canvas.width = img.width;
+    cache.canvas.height = img.height;
+    cache.context = cache.canvas.getContext('2d');
+    cache.context.drawImage(img, 0, 0, img.width, img.height);
+    return cache;
+  }
+
   function tick(game) {
     handleKeys();
     handleDeviceOrientation();
@@ -63,7 +75,7 @@ function Smiley(startX, startY) {
   }
 
   function render(ctx) {
-    ctx.drawImage(img, x, y, img.width, img.height);
+    ctx.drawImage(cache.canvas, x, y, img.width, img.height);
   }
 
   return {
