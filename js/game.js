@@ -57,7 +57,9 @@ window.onload = function () {
     }, false);
 
     game.canvas.addEventListener('click', function () {
-      addSmiley();
+      for (var i = 0; i < 10; i++) {
+        addSmiley();
+      }
     }, false);
   }
 
