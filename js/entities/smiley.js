@@ -1,25 +1,22 @@
+Smiley.image = new Image();
+Smiley.image.src = 'res/smiley1.svg';
+Smiley.width = 50;
+Smiley.height = 50;
+
+Smiley.image.onload = function() {
+  Smiley.cache = {};
+  Smiley.cache.canvas = document.createElement('canvas');
+  Smiley.cache.canvas.width = Smiley.width;
+  Smiley.cache.canvas.height = Smiley.height;
+  Smiley.cache.context = Smiley.cache.canvas.getContext('2d');
+  Smiley.cache.context.drawImage(Smiley.image, 0, 0, Smiley.width, Smiley.height);
+};
+
 function Smiley(startX, startY) {
-  var x = startX || 0;
-  var y = startY || 0;
+  var x = startX;
+  var y = startY;
   var speedX = 0;
   var speedY = 0;
-
-  var img = new Image();
-  img.width = 100;
-  img.height = 100;
-  img.src = 'res/smiley1.svg';
-
-  var cache = createCache();
-
-  function createCache() {
-    var cache = {};
-    cache.canvas = document.createElement('canvas');
-    cache.canvas.width = img.width;
-    cache.canvas.height = img.height;
-    cache.context = cache.canvas.getContext('2d');
-    cache.context.drawImage(img, 0, 0, img.width, img.height);
-    return cache;
-  }
 
   function tick(game) {
     handleKeys();
@@ -61,12 +58,12 @@ function Smiley(startX, startY) {
     }
 
     function bounceOffTheWall() {
-      if (x + img.width > game.canvas.width
+      if (x + Smiley.width > game.canvas.width
         || x < 0) {
         speedX *= -1;
         x += speedX * 0.5;
       }
-      if (y + img.height > game.canvas.height
+      if (y + Smiley.height > game.canvas.height
         || y < 0) {
         speedY *= -1;
         y += speedY * 0.5;
@@ -75,7 +72,7 @@ function Smiley(startX, startY) {
   }
 
   function render(ctx) {
-    ctx.drawImage(cache.canvas, x, y, img.width, img.height);
+    ctx.drawImage(Smiley.cache.canvas, x, y, Smiley.width, Smiley.height);
   }
 
   return {

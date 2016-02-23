@@ -2,9 +2,6 @@ window.onload = function () {
   window.game = {};
 
   game.canvas = document.getElementById('canvas');
-  game.canvas.width = 640;
-  game.canvas.height = 480;
-
   game.ctx = game.canvas.getContext('2d');
 
   game.keysDown = {};
@@ -57,15 +54,15 @@ window.onload = function () {
     }, false);
 
     game.canvas.addEventListener('click', function () {
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 100; i++) {
         addSmiley();
       }
     }, false);
   }
 
   function addSmiley() {
-    var x = Math.random() * (game.canvas.width - 100);
-    var y = Math.random() * (game.canvas.height - 100);
+    var x = Math.random() * (game.canvas.width - Smiley.width);
+    var y = Math.random() * (game.canvas.height - Smiley.height);
     game.entities.push(new Smiley(x, y));
   }
 };
